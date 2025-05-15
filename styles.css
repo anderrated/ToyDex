@@ -79,6 +79,7 @@ header {
   flex-direction: column;
   position: sticky;
   top: 0;
+  z-index: 10;
 }
 
 .home header .main-header{
@@ -250,6 +251,7 @@ header {
   list-style: none;
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  font-family: Manjari, sans-serif;
 }
 
 .home .filter-item-container .items-container .items-list li {
@@ -263,32 +265,69 @@ header {
   margin: 0.5rem;
   border-radius: 50px;
   background-color: #ffffff;
+  overflow: hidden;
 }
 
 /* item decoration */
 .home .filter-item-container .items-container .items-list li .li-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .home .filter-item-container .items-container .items-list li .li-content .feedback {
   display: flex;
-  flex-direction: row;
   height: 2rem;
-  margin-top: 35px;
-  margin-right: 25px;
+  gap: 0.5rem;
   justify-content: flex-end;
+  margin: 10px 2rem 0 0;
 }
 
-.home .filter-item-container .items-container .items-list li .li-content .feedback img:last-of-type {
-  scale: 1.25;
+.home .filter-item-container .items-container .items-list li .li-content .feedback .feedback-item{
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
+.home .filter-item-container .items-container .items-list li .li-content .feedback .feedback-item img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.home .filter-item-container .items-container .items-list li .li-content .feedback .feedback-item span {
+  margin-left: 0.2rem;
+}
+
+.home .filter-item-container .items-container .items-list li .li-content .feedback .feedback-item .comment-icon{
+  scale: 1.3;
+}
+
+.home .filter-item-container .items-container .items-list li .li-content .main-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.home .filter-item-container .items-container .items-list li .li-content .main-img img {
+  margin-bottom: 5rem;
+  object-fit: cover;
+}
+  
 .home .filter-item-container .items-container .items-list li .li-content .bubble-text {
   background-color: var(--purple);
-  border-radius: 150px;
+  border-radius: 80% 80% 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  padding: 1.2rem 0.5rem;
+  text-align: center;
+  color: white;
 }
 
 
