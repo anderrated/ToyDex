@@ -1,7 +1,6 @@
 <?php
     include 'DBConnector.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +16,8 @@
                 <h1 class="toydex-logo">TOYDEX</h1>
                 <nav>
                     <ul>
-                        <li><a href="#"><img src="images/view-grid-svgrepo-com.svg" alt="view"></a></li>                    
-                        <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="view"></a></li>                    
+                        <!-- <li><a href="#"><img src="images/view-grid-svgrepo-com.svg" alt="view"></a></li>                    
+                        <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="view"></a></li>                     -->
                         <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="view"></a></li>                
                     </ul>
                 </nav>
@@ -65,7 +64,7 @@
             <div class="items-container">
                 <!-- hardcoded items -->
                 <ul class="items-list">
-                    <li id="item1">
+                    <!-- <li id="item1">
                         <div class="li-content">
                             <div class="feedback">
                                 <div class="feedback-item"><img src="images/heart-svgrepo-com.svg" class="heart-icon"><span>1.5k</span></div>
@@ -80,7 +79,7 @@
                                 <p>Price</p>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                     <?php
                         $sql = "SELECT toyitem.name, toyitem.description, toyitem.item_id, toyimage.image_url, toyitem.brand, toyitem.category FROM toyitem, toyimage WHERE toyitem.item_id = toyimage.item_id";
                         $result = $conn->query($sql);
