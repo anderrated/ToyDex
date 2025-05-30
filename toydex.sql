@@ -63,6 +63,9 @@ CREATE TABLE `manufactures` (
 =======
   `item_id` int(11) DEFAULT NULL,
   `batch_num` int(11) DEFAULT NULL
+<<<<<<< HEAD
+>>>>>>> parent of bb37ac5 (Working Full CRUD Functions)
+=======
 >>>>>>> parent of bb37ac5 (Working Full CRUD Functions)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
