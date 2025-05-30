@@ -16,8 +16,6 @@ include 'DBConnector.php';
                 <h1 class="toydex-logo">TOYDEX</h1>
                 <nav>
                     <ul>
-                        <li><a href="home.php"><img src="images/view-grid-svgrepo-com.svg" alt="home"></a></li>
-                        <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="inventory"></a></li>
                         <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="profile"></a></li>                
                     </ul>
                 </nav>
@@ -240,8 +238,8 @@ include 'DBConnector.php';
             <label for="date_acquired" class="add_Popup_Label">Date Acquired</label>
             <input type="date" class="add_Popup_Input" name="date_acquired" required>
         </div>
-        <button type="submit" class="addToyButton">Add Toy</button>
-        <button type="button" onclick="closeAddPopup()">Cancel</button>
+        <button type="submit" class="addToyButton add-form-btn">Add Toy</button>
+        <button type="button" onclick="closeAddPopup()" class="add-form-btn">Cancel</button>
     </form>
 
     <script src="main.js"></script>
