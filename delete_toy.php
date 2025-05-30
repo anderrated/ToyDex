@@ -7,7 +7,7 @@ include 'DBConnector.php';
 
 // 2) Get and sanitize the toy ID from POST
 $toyid = isset($_POST['item_id']) ? intval($_POST['item_id']) : 0;
-if ($toyid <= 0) {
+if ($toyid < 0) {
     die('Invalid toy ID.');
 }
 
