@@ -16,8 +16,6 @@ include 'DBConnector.php';
                 <h1 class="toydex-logo">TOYDEX</h1>
                 <nav>
                     <ul>
-                        <li><a href="home.php"><img src="images/view-grid-svgrepo-com.svg" alt="home"></a></li>
-                        <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="inventory"></a></li>
                         <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="profile"></a></li>                
                     </ul>
                 </nav>
@@ -143,9 +141,9 @@ include 'DBConnector.php';
                 </ul>
             </div>
         </section>
-        <div class="add">
-            <button id="add-item" onclick="openAddPopup()">Add Item</button>
-        </div>
+    <div class="add">
+        <button id="add-item" onclick="openAddPopup()"><img src = "images/add-circle-svgrepo-com.svg"></button>
+    </div>
     </section>
     <footer>
         <div class="logo">

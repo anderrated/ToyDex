@@ -271,6 +271,59 @@ header {
   overflow: hidden;
 }
 
+/* registration */
+.register-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: var(--light-grey);
+  position: relative;
+}
+
+.register-user-container .register-user {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background-color: var(--pink);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 30%;
+  color: white;
+  font-family: Manjari, sans-serif;
+}
+
+.register-user h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.register-user form .form-group input {
+  border-radius: 50px;
+  width: 100%;
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.register-user form .form-group input[type="submit"],.register-user form .form-group button {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  width: 100%;
+}
+
+.register-user-container .register-user {
+    font-size: 1.50rem;
+}
+
 /* item decoration */
 .home .filter-item-container .items-container .items-list li .li-content {
   display: flex;
@@ -347,6 +400,11 @@ header {
   transform: translate(0%, -100%) scale(1.1); /* Combine translate and scale */
   -webkit-transform: translate(0%, -100%) scale(1.1);
   -ms-transform: translate(0%, -100%) scale(1.1);
+}
+
+.home .add button {
+  background: none;
+  border: none;
 }
 
 /*footer*/
