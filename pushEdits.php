@@ -44,10 +44,6 @@ if($conn->query($sql) === TRUE){
     $sql = "UPDATE toyimage SET image_url = '$image_url', description = '$description_image' WHERE image_id = $image_id;";
     $conn->query($sql);
 
-    //manufactures
-    $sql = "UPDATE manufactures SET batch_num = '$batch_num' WHERE manufacturer_id = $manufacturer_id AND item_id = $item_id;";
-    $conn->query($sql);
-
     //manufacturer
     $sql = "UPDATE manufacturer SET manufacturer_name = '$manufacturer_name', location = '$manufacturer_location' WHERE manufacturer_id = $manufacturer_id;";
     $conn->query($sql);

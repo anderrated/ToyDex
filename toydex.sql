@@ -58,21 +58,13 @@ INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturer_name`, `location`) 
 
 CREATE TABLE `manufactures` (
   `manufacturer_id` int(11) DEFAULT NULL,
-<<<<<<< HEAD
   `item_id` int(11) DEFAULT NULL
-=======
-  `item_id` int(11) DEFAULT NULL,
-  `batch_num` int(11) DEFAULT NULL
-<<<<<<< HEAD
->>>>>>> parent of bb37ac5 (Working Full CRUD Functions)
-=======
->>>>>>> parent of bb37ac5 (Working Full CRUD Functions)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-INSERT INTO `manufactures` (`manufacturer_id`, `item_id`, `batch_num`) VALUES
-(1,1, 202504),
-(2,2, 202505);
+INSERT INTO `manufactures` (`manufacturer_id`, `item_id`) VALUES
+(1,1),
+(2,2);
 --
 -- Table structure for table `provides`
 --
@@ -239,15 +231,15 @@ ALTER TABLE `toyitem`
 -- Constraints for table `has`
 --
 ALTER TABLE `has`
-  ADD CONSTRAINT `has_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `toyitem` (`item_id`),
-  ADD CONSTRAINT `has_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `toyimage` (`image_id`);
+  ADD CONSTRAINT `has_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `toyitem` (`item_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `has_ibfk_2` FOREIGN KEY (`image_id`) REFERENCES `toyimage` (`image_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `manufactures`
 --
 ALTER TABLE `manufactures`
-  ADD CONSTRAINT `manufactures_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturer` (`manufacturer_id`),
-  ADD CONSTRAINT `manufactures_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `toyitem` (`item_id`);
+  ADD CONSTRAINT `manufactures_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturer` (`manufacturer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `manufactures_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `toyitem` (`item_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `provides`
@@ -260,8 +252,8 @@ ALTER TABLE `provides`
 -- Constraints for table `purchaseathrough`
 --
 ALTER TABLE `purchaseathrough`
-  ADD CONSTRAINT `purchaseathrough_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `toyitem` (`item_id`),
-  ADD CONSTRAINT `purchaseathrough_ibfk_2` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`);
+  ADD CONSTRAINT `purchaseathrough_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `toyitem` (`item_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `purchaseathrough_ibfk_2` FOREIGN KEY (`supplier_id`) REFERENCES `supplier` (`supplier_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

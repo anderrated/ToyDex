@@ -62,11 +62,6 @@ if($result->num_rows > 0){
         </div>
 
         <div>
-            <label for="batch_num" class = "add_Popup_Label">Batch_num</label>
-            <input type = "number" class = "add_Popup_Input" name ="batch_num" value= "'.$manufacturerRow['batch_num'].'" required>
-        </div>
-
-        <div>
             <label for="Supplier_Name" class = "add_Popup_Label">Supplier Name</label>
             <input type = "text" class = "add_Popup_Input" name ="Supplier_Name" value= "'.$supplierRow['supplier_name'].'" required>
         </div>
