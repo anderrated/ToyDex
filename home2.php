@@ -1,5 +1,5 @@
 <?php
-include 'DBConnector.php';
+    include 'DBConnector.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +16,9 @@ include 'DBConnector.php';
                 <h1 class="toydex-logo">TOYDEX</h1>
                 <nav>
                     <ul>
-                        <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="profile"></a></li>                
+                        <!-- <li><a href="#"><img src="images/view-grid-svgrepo-com.svg" alt="view"></a></li>                    
+                        <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="view"></a></li>                     -->
+                        <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="view"></a></li>                
                     </ul>
                 </nav>
             </div>
@@ -36,7 +38,8 @@ include 'DBConnector.php';
                         <label>Category:</label>
                         <select class="expand" name="category" placeholder="Category">
                             <option value="">--Select Category--</option>
-                            <option value="Dog" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Dog') ? 'selected' : ''; ?>>Dog</option>
+                            <!--example option-->
+                            <option value="None" <?php echo (isset($_GET['category']) && $_GET['category'] == 'None') ? 'selected' : ''; ?>>None</option>
                             <option value="Hotdog" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Hotdog') ? 'selected' : ''; ?>>Hotdog</option>
                         </select>
                     </div>
@@ -54,44 +57,56 @@ include 'DBConnector.php';
             <div class="items-container">
                 <ul class="items-list">
                     <?php
+                    // Only perform search if at least one filter has a value
                     if (isset($_GET['toy-name']) || isset($_GET['category']) || isset($_GET['manufacturer'])) {
+                        // Build the base SQL query
                         $sql = "SELECT toyitem.name, toyitem.description, toyitem.item_id, toyimage.image_url, toyitem.brand, toyitem.category 
                                 FROM toyitem 
                                 INNER JOIN has ON toyitem.item_id = has.item_id 
                                 INNER JOIN toyimage ON toyimage.image_id = has.image_id
                                 WHERE 1=1";
+                        
+                        // Add conditions based on filters
                         $conditions = [];
                         $params = [];
                         $types = '';
+                        
                         if (!empty($_GET['toy-name'])) {
                             $sql .= " AND toyitem.name LIKE ?";
                             $params[] = '%' . $_GET['toy-name'] . '%';
                             $types .= 's';
                         }
+                        
                         if (!empty($_GET['category'])) {
                             $sql .= " AND toyitem.category = ?";
                             $params[] = $_GET['category'];
                             $types .= 's';
                         }
+                        
                         if (!empty($_GET['manufacturer'])) {
                             $sql .= " AND toyitem.brand LIKE ?";
                             $params[] = '%' . $_GET['manufacturer'] . '%';
                             $types .= 's';
                         }
+                        
+                        // Prepare and execute the statement
                         $stmt = $conn->prepare($sql);
+                        
                         if (!empty($params)) {
                             $stmt->bind_param($types, ...$params);
                         }
+                        
                         $stmt->execute();
                         $result = $stmt->get_result();
+                        
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
                                 echo "<li id='".$row['item_id']."'>
                                         <div class='li-content'>
-                                            <button onclick=\"if(confirm('Are you sure you want to delete this toy?')){document.getElementById('deleteForm_".$row['item_id']."').submit();}\" class='delete-btn'>Delete</button>
-                                            <form id='deleteForm_".$row['item_id']."' action='delete_toy.php' method='post' style='display: none;'>
-                                                <input type='hidden' name='item_id' value='" . $row['item_id'] . "'>
-                                            </form>
+                                            <div class='feedback'>
+                                                <div class='feedback-item'><img src='images/heart-svgrepo-com.svg' class='heart-icon'><span>1.5k</span></div>
+                                                <div class='feedback-item'><img src='images/comment-alt-lines-svgrepo-com.svg' class='comment-icon'><span>1.5k</span></div> 
+                                            </div>
                                             <div class='main-img'>
                                                 <img src='".$row['image_url']."'>
                                             </div>
@@ -106,57 +121,47 @@ include 'DBConnector.php';
                         } else {
                             echo "<p class='no-results'>No item(s) found matching your criteria.</p>";
                         }
+                        
                         $stmt->close();
                     } else {
+                        // Display all items when no filters are applied
                         $sql = "SELECT toyitem.name, toyitem.description, toyitem.item_id, toyimage.image_url, toyitem.brand, toyitem.category 
                                 FROM toyitem 
                                 INNER JOIN has ON toyitem.item_id = has.item_id 
                                 INNER JOIN toyimage ON toyimage.image_id = has.image_id";
                         $result = $conn->query($sql);
+                        
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                $id      = (int) $row['item_id'];
-                                $img     = htmlspecialchars($row['image_url']);
-                                $name    = htmlspecialchars($row['name']);
-                                $cat     = htmlspecialchars($row['category']);
-                                $brand   = htmlspecialchars($row['brand']);
-
-                                echo '<li id="' . $id . '">
-                                        <div class="li-content">
-                                        <div class = update-btns>
-                                            <form action="edit_toy.php" class="deleteSection" method="post">
-                                                <input type="hidden" name="item_id" value="' . $id . '">
-                                                <button type="submit" id="edit-btn">Edit</button>
+                                echo "<li id='".$row['item_id']."'>
+                                        <div class='li-content'>
+                                            <form action='deleteToy.php' class='deleteSection' method='post'>
+                                                <input type='hidden' name='item_id' value='" . $row['item_id'] . "'>
+                                                <button type='submit' id='delete-btn'>Delete</button>
                                             </form>
-                                            <form action="delete_toy.php" class="deleteSection" method="post">
-                                                <input type="hidden" name="item_id" value="' . $id . '">
-                                                <button type="submit" id="delete-btn">Delete</button>
-                                            </form>
-                                        </div>
-                                        <a href="viewItem.php?item_id=' . $id . '" class="card-link">
-                                            <div class="main-img">
-                                            <img src="' . $img . '" alt="' . $name . '">
+                                            <div class='main-img'>
+                                                <img src='".$row['image_url']."'>
                                             </div>
-                                            <div class="bubble-text">
-                                            <h2>' . $name . '</h2>
-                                            <h4>' . $cat . '</h4>
-                                            <p>' . $brand . '</p>
+                                            <div class='bubble-text'>
+                                                <h2>".htmlspecialchars($row['name'])."</h2>
+                                                <h4>".htmlspecialchars($row['category'])."</h4>
+                                                <p>".htmlspecialchars($row['brand'])."</p>
                                             </div>
-                                        </a>
                                         </div>
-                                    </li>';
+                                    </li>";
                             }
                         } else {
                             echo "<p class='no-results'>No items available.</p>";
                         }
                     }
+                    
                     $conn->close();
                     ?>
                 </ul>
             </div>
         </section>
     <div class="add">
-        <button id="add-item" onclick="openAddPopup()"><img src = "images/add-circle-svgrepo-com.svg"></button>
+        <img src="images/add-circle-svgrepo-com.svg" id="add-item">
     </div>
     </section>
     <footer>
@@ -186,62 +191,5 @@ include 'DBConnector.php';
             </div>
         </div>
     </footer>
-
-    <!-- Add Toy Popup Form -->
-    <form action="addToy.php" class="add_Popup_Form" id="add_Popup_Form" method="post" enctype="multipart/form-data">
-        <h2>Add a New Toy</h2>
-        <div>
-            <label for="Toy_Name" class="add_Popup_Label">Toy Name</label>
-            <input type="text" class="add_Popup_Input" name="Toy_Name" autocomplete="name" required>
-        </div>
-        <div>                
-            <label for="Description" class="add_Popup_Label">Description</label>
-            <input type="text" class="add_Popup_Input" name="Description" autocomplete="off" required>
-        </div>
-        <div> 
-            <label for="brand" class="add_Popup_Label">Brand</label>
-            <input type="text" class="add_Popup_Input" name="brand" autocomplete="organization" required>
-        </div>
-        <div>
-            <label for="Category" class="add_Popup_Label">Category</label>
-            <input type="text" class="add_Popup_Input" name="Category" autocomplete="off" required>
-        </div>
-        <div>
-            <label for="image_url" class="add_Popup_Label">Image</label>
-            <input type="file" class="add_Popup_Input" name="image_url" accept="image/*" required>
-        </div>
-        <div>
-            <label for="Manufacturer_Name" class="add_Popup_Label">Manufacturer Name</label>
-            <input type="text" class="add_Popup_Input" name="Manufacturer_Name" required>
-        </div>
-        <div>
-            <label for="manufacturer_location" class="add_Popup_Label">Manufacturer Location</label>
-            <input type="text" class="add_Popup_Input" name="manufacturer_location" required>
-        </div>
-        <div>
-            <label for="batch_num" class="add_Popup_Label">Batch Number</label>
-            <input type="number" class="add_Popup_Input" name="batch_num" required>
-        </div>
-        <div>
-            <label for="Supplier_Name" class="add_Popup_Label">Supplier Name</label>
-            <input type="text" class="add_Popup_Input" name="Supplier_Name" required>
-        </div>
-        <div>
-            <label for="Email" class="add_Popup_Label">Email</label>
-            <input type="email" class="add_Popup_Input" name="Email" required>
-        </div>
-        <div>
-            <label for="date_ordered" class="add_Popup_Label">Date Ordered</label>
-            <input type="date" class="add_Popup_Input" name="date_ordered" required>
-        </div>
-        <div>
-            <label for="date_acquired" class="add_Popup_Label">Date Acquired</label>
-            <input type="date" class="add_Popup_Input" name="date_acquired" required>
-        </div>
-        <button type="submit" class="addToyButton">Add Toy</button>
-        <button type="button" class="close_addPop" onclick="closeAddPopup()">Cancel</button>
-    </form>
-
-    <script src="main.js"></script>
 </body>
 </html>

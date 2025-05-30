@@ -33,10 +33,10 @@ CREATE TABLE `has` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `has` (`item_id`, `image_id`) VALUES
--- (1, 1),
--- (2, 2),
--- (3, 3);
+INSERT INTO `has` (`item_id`, `image_id`) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
 --
 -- Table structure for table `manufacturer`
 --
@@ -48,10 +48,10 @@ CREATE TABLE `manufacturer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturer_name`, `location`) VALUES
--- (1, 'SnuggleToys Inc.', 'Japan'),
--- (2, 'BrickMakers Ltd.', 'Germany'),
--- (3, 'ZoomWheels Corp.', 'USA');
+INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturer_name`, `location`) VALUES
+(1, 'SnuggleToys Inc.', 'Japan'),
+(2, 'BrickMakers Ltd.', 'Germany'),
+(3, 'ZoomWheels Corp.', 'USA');
 --
 -- Table structure for table `manufactures`
 --
@@ -63,9 +63,9 @@ CREATE TABLE `manufactures` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `manufactures` (`manufacturer_id`, `item_id`, `batch_num`) VALUES
--- (1,1, 202504),
--- (2,2, 202505);
+INSERT INTO `manufactures` (`manufacturer_id`, `item_id`, `batch_num`) VALUES
+(1,1, 202504),
+(2,2, 202505);
 --
 -- Table structure for table `provides`
 --
@@ -76,9 +76,9 @@ CREATE TABLE `provides` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `provides` (`manufacturer_id`, `supplier_id`) VALUES
--- (1,1),
--- (2,2);
+INSERT INTO `provides` (`manufacturer_id`, `supplier_id`) VALUES
+(1,1),
+(2,2);
 --
 -- Table structure for table `purchaseathrough`
 --
@@ -91,10 +91,10 @@ CREATE TABLE `purchaseathrough` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `purchaseathrough` (`item_id`, `supplier_id`, `date_ordered`, `date_acquired`) VALUES
--- (1,1, '2025-04-01', '2025-04-05'),
--- (2,2, '2025-04-02', '2025-04-06');
--- --
+INSERT INTO `purchaseathrough` (`item_id`, `supplier_id`, `date_ordered`, `date_acquired`) VALUES
+(1,1, '2025-04-01', '2025-04-05'),
+(2,2, '2025-04-02', '2025-04-06');
+--
 -- Table structure for table `supplier`
 --
 
@@ -105,9 +105,9 @@ CREATE TABLE `supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `email`) VALUES
--- (1, 'ToyDistributor A', 'distA@example.com'),
--- (2, 'ToyWarehouse B', 'warehouseB@example.com');
+INSERT INTO `supplier` (`supplier_id`, `supplier_name`, `email`) VALUES
+(1, 'ToyDistributor A', 'distA@example.com'),
+(2, 'ToyWarehouse B', 'warehouseB@example.com');
 --
 -- Table structure for table `toyimage`
 --
@@ -120,11 +120,11 @@ CREATE TABLE `toyimage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
--- INSERT INTO `toyimage` (`image_id`, `image_url`, `description`, `is_primary_image`) VALUES
--- (1, 'https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ', 'Front view of teddy bear', 1),
--- (2, 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'Box image of lego set', 1),
--- (3, 'https://fastly.picsum.photos/id/7/4728/3168.jpg?hmac=c5B5tfYFM9blHHMhuu4UKmhnbZoJqrzNOP9xjkV4w3o', 'Side view of race car', 0);
--- --
+INSERT INTO `toyimage` (`image_id`, `image_url`, `description`, `is_primary_image`) VALUES
+(1, 'https://fastly.picsum.photos/id/2/5000/3333.jpg?hmac=_KDkqQVttXw_nM-RyJfLImIbafFrqLsuGO5YuHqD-qQ', 'Front view of teddy bear', 1),
+(2, 'https://fastly.picsum.photos/id/3/5000/3333.jpg?hmac=GDjZ2uNWE3V59PkdDaOzTOuV3tPWWxJSf4fNcxu4S2g', 'Box image of lego set', 1),
+(3, 'https://fastly.picsum.photos/id/7/4728/3168.jpg?hmac=c5B5tfYFM9blHHMhuu4UKmhnbZoJqrzNOP9xjkV4w3o', 'Side view of race car', 0);
+--
 -- Table structure for table `toyitem`
 --
 
@@ -136,11 +136,11 @@ CREATE TABLE `toyitem` (
   `category` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 ------------------------------------------------------------
--- INSERT INTO `toyitem` (`item_id`, `name`, `description`, `brand`, `category`) VALUES
--- (1, 'Teddy Bear', 'A soft and cuddly teddy bear.', 'SnuggleToys', 'Stuffed Toys'),
--- (2, 'Lego Set', 'A 500-piece building block set.', 'BrickMakers', 'Blocks'),
--- (3, 'Race Car', 'A fast toy race car for kids.', 'ZoomWheels', 'Cars');
--- --
+INSERT INTO `toyitem` (`item_id`, `name`, `description`, `brand`, `category`) VALUES
+(1, 'Teddy Bear', 'A soft and cuddly teddy bear.', 'SnuggleToys', 'Stuffed Toys'),
+(2, 'Lego Set', 'A 500-piece building block set.', 'BrickMakers', 'Blocks'),
+(3, 'Race Car', 'A fast toy race car for kids.', 'ZoomWheels', 'Cars');
+--
 -- Indexes for dumped tables
 --
 
