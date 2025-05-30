@@ -58,13 +58,18 @@ INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturer_name`, `location`) 
 
 CREATE TABLE `manufactures` (
   `manufacturer_id` int(11) DEFAULT NULL,
+<<<<<<< HEAD
   `item_id` int(11) DEFAULT NULL
+=======
+  `item_id` int(11) DEFAULT NULL,
+  `batch_num` int(11) DEFAULT NULL
+>>>>>>> parent of bb37ac5 (Working Full CRUD Functions)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-INSERT INTO `manufactures` (`manufacturer_id`, `item_id`) VALUES
-(1,1),
-(2,2);
+INSERT INTO `manufactures` (`manufacturer_id`, `item_id`, `batch_num`) VALUES
+(1,1, 202504),
+(2,2, 202505);
 --
 -- Table structure for table `provides`
 --
