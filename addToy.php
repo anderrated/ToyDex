@@ -15,7 +15,6 @@ try {
     $category = $_POST['Category'];
     $manufacturer_name = $_POST['Manufacturer_Name'];
     $manufacturer_location = $_POST['manufacturer_location'];
-    $batch_num = $_POST['batch_num'];
     $supplier_name = $_POST['Supplier_Name'];
     $email = $_POST['Email'];
     $date_ordered = $_POST['date_ordered'];
@@ -70,8 +69,8 @@ try {
     $stmt->close();
 
     // Insert into manufactures
-    $stmt = $conn->prepare("INSERT INTO manufactures (manufacturer_id, item_id, batch_num) VALUES (?, ?, ?)");
-    $stmt->bind_param('iii', $manufacturer_id, $item_id, $batch_num);
+    $stmt = $conn->prepare("INSERT INTO manufactures (manufacturer_id, item_id) VALUES (?, ?)");
+    $stmt->bind_param('ii', $manufacturer_id, $item_id);
     $stmt->execute();
     $stmt->close();
 

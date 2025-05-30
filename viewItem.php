@@ -77,10 +77,6 @@ include 'DBConnector.php';
                         <label>Manufacturer Location</label>
                         <p><?=htmlspecialchars($row['location']) ?></p>
                     </div>
-                    <div class="detail6">
-                        <label>Batch Number</label>
-                        <p><?=htmlspecialchars($row['batch_num']) ?></p>
-                    </div>
                     <div class="detail7">
                         <label>Supplier</label>
                         <p><?=htmlspecialchars($row['supplier_name']) ?></p>

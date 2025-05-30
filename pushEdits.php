@@ -9,7 +9,6 @@ $category = $_POST['Category'];
 
 $manufacturer_name = $_POST['Manufacturer_Name'];
 $manufacturer_location = $_POST['manufacturer_location'];
-$batch_num = $_POST['batch_num'];
 
 
 $supplier_name = $_POST['Supplier_Name'];
@@ -42,10 +41,6 @@ if($conn->query($sql) === TRUE){
 
     //toyimage
     $sql = "UPDATE toyimage SET image_url = '$image_url', description = '$description_image' WHERE image_id = $image_id;";
-    $conn->query($sql);
-
-    //manufactures
-    $sql = "UPDATE manufactures SET batch_num = '$batch_num' WHERE manufacturer_id = $manufacturer_id AND item_id = $item_id;";
     $conn->query($sql);
 
     //manufacturer
