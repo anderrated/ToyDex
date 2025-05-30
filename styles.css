@@ -400,4 +400,93 @@ footer .labels .label .icons {
   width: 10rem;
 }
 
+.image-group {
+    margin-bottom: 10px;
+}
 
+.image-preview {
+    margin-top: 5px;
+}
+
+.remove-image {
+    margin-left: 10px;
+}
+
+
+  /* for larger section */
+.add_Popup_Form{
+display: none;
+position: fixed;
+bottom: 25%;
+right: 35%;
+border: none;
+z-index: 2000;
+width: 30%;
+height: 400px;
+padding: 10px;
+background-color: white;
+border-radius: 50px;
+font-family: Arial;
+}
+
+/* for form */
+/* .text_section{
+width: 45%;
+} */
+
+.add_Popup_Form div{
+display: table-row;
+padding-bottom: 20%;
+width: 100%;
+}
+
+.add_Popup_Input {
+display: table-cell;
+width: 100%;
+max-width: 100%;
+padding-bottom: 2%;
+height: 25px;
+background-color:rgb(166, 0, 255);
+border-radius: 50px;
+border: none; 
+color: white;
+
+}
+
+.add_Popup_Label {
+display: table-cell;
+width: 40%;
+max-width: 40%;
+color:rgb(166, 0, 255);
+font-weight: light;
+font-size: 10px;
+font-family: Arial;
+}
+
+.add_Popup_Form h2{
+color:rgb(0, 0, 0);
+font-weight: 100;
+font-size: 20px;
+font-family: Arial;
+}
+
+.addToyButton{
+background-color: rgba(0, 247, 255, 0.91);
+}
+
+.close_addPop{
+background-color: rgba(255, 0, 174, 0.91);
+}
+
+.addToyButton, .close_addPop{
+color: white;
+align-self: center;
+border-radius: 50px;
+width: 200px;
+border: none;
+margin-top: 10px;
+}
+
+.input_division{
+width:250px;
+}

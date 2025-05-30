@@ -172,5 +172,3 @@ INSERT INTO `has` (item_id, image_id) VALUES
 ('item002', 'img002'),
 ('item003', 'img003');
 
--- Commit all the above changes
-COMMIT;
