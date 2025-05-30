@@ -58,7 +58,7 @@ INSERT INTO `manufacturer` (`manufacturer_id`, `manufacturer_name`, `location`) 
 
 CREATE TABLE `manufactures` (
   `manufacturer_id` int(11) DEFAULT NULL,
-  `item_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -134,7 +134,7 @@ CREATE TABLE `toyitem` (
   `brand` varchar(100) DEFAULT NULL,
   `category` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-------------------------------------------------------------
+-- ----------------------------------------------------------
 INSERT INTO `toyitem` (`item_id`, `name`, `description`, `brand`, `category`) VALUES
 (1, 'Teddy Bear', 'A soft and cuddly teddy bear.', 'SnuggleToys', 'Stuffed Toys'),
 (2, 'Lego Set', 'A 500-piece building block set.', 'BrickMakers', 'Blocks'),
