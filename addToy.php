@@ -1,6 +1,9 @@
 <?php
 include 'DBConnector.php';
 
+// Debug: Confirm script is reached
+echo "addToy.php reached<br>";
+
 // Start a transaction for data consistency
 $conn->begin_transaction();
 
@@ -27,18 +30,18 @@ try {
 
     // Handle image upload
     if (isset($_FILES['image_url']) && $_FILES['image_url']['error'] == 0) {
-        $upload_dir = 'uploads/';
+        $upload_dir = 'Uploads/';
         if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0777, true);
         }
         $file_name = $_FILES['image_url']['name'];
         $file_tmp = $_FILES['image_url']['tmp_name'];
-        $image_id = $conn->insert_id + 1; // Generate a unique image_id
         $uploaded_file = $upload_dir . basename($file_name);
         if (move_uploaded_file($file_tmp, $uploaded_file)) {
-            $stmt = $conn->prepare("INSERT INTO toyimage (image_id, image_url, description, is_primary_image) VALUES (?, ?, '', 1)");
-            $stmt->bind_param('is', $image_id, $uploaded_file);
+            $stmt = $conn->prepare("INSERT INTO toyimage (image_url, description, is_primary_image) VALUES (?, '', 1)");
+            $stmt->bind_param('s', $uploaded_file);
             $stmt->execute();
+            $image_id = $conn->insert_id; // Get the auto-generated image_id
             $stmt->close();
 
             $stmt = $conn->prepare("INSERT INTO has (item_id, image_id) VALUES (?, ?)");

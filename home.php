@@ -16,6 +16,8 @@ include 'DBConnector.php';
                 <h1 class="toydex-logo">TOYDEX</h1>
                 <nav>
                     <ul>
+                        <li><a href="home.php"><img src="images/view-grid-svgrepo-com.svg" alt="home"></a></li>
+                        <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="inventory"></a></li>
                         <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="profile"></a></li>                
                     </ul>
                 </nav>
@@ -115,30 +117,22 @@ include 'DBConnector.php';
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                $id      = (int) $row['item_id'];
-                                $img     = htmlspecialchars($row['image_url']);
-                                $name    = htmlspecialchars($row['name']);
-                                $cat     = htmlspecialchars($row['category']);
-                                $brand   = htmlspecialchars($row['brand']);
-
-                                echo '<li id="' . $id . '">
-                                        <div class="li-content">
-                                        <form action="delete_toy.php" class="deleteSection" method="post">
-                                            <input type="hidden" name="item_id" value="' . $id . '">
-                                            <button type="submit" id="delete-btn">Delete</button>
-                                        </form>
-                                        <a href="viewItem.php?item_id=' . $id . '" class="card-link">
-                                            <div class="main-img">
-                                            <img src="' . $img . '" alt="' . $name . '">
+                                echo "<li id='".$row['item_id']."'>
+                                        <div class='li-content'>
+                                            <button onclick=\"if(confirm('Are you sure you want to delete this toy?')){document.getElementById('deleteForm_".$row['item_id']."').submit();}\" class='delete-btn'>Delete</button>
+                                            <form id='deleteForm_".$row['item_id']."' action='delete_toy.php' method='post' style='display: none;'>
+                                                <input type='hidden' name='item_id' value='" . $row['item_id'] . "'>
+                                            </form>
+                                            <div class='main-img'>
+                                                <img src='".$row['image_url']."'>
                                             </div>
-                                            <div class="bubble-text">
-                                            <h2>' . $name . '</h2>
-                                            <h4>' . $cat . '</h4>
-                                            <p>' . $brand . '</p>
+                                            <div class='bubble-text'>
+                                                <h2>".htmlspecialchars($row['name'])."</h2>
+                                                <h4>".htmlspecialchars($row['category'])."</h4>
+                                                <p>".htmlspecialchars($row['brand'])."</p>
                                             </div>
-                                        </a>
                                         </div>
-                                    </li>';
+                                    </li>";
                             }
                         } else {
                             echo "<p class='no-results'>No items available.</p>";
@@ -149,9 +143,9 @@ include 'DBConnector.php';
                 </ul>
             </div>
         </section>
-    <div class="add">
-        <button id="add-item" onclick="openAddPopup()"><img src = "images/add-circle-svgrepo-com.svg"></button>
-    </div>
+        <div class="add">
+            <button id="add-item" onclick="openAddPopup()">Add Item</button>
+        </div>
     </section>
     <footer>
         <div class="logo">
@@ -233,7 +227,7 @@ include 'DBConnector.php';
             <input type="date" class="add_Popup_Input" name="date_acquired" required>
         </div>
         <button type="submit" class="addToyButton">Add Toy</button>
-        <button type="button" class="close_addPop" onclick="closeAddPopup()">Cancel</button>
+        <button type="button" onclick="closeAddPopup()">Cancel</button>
     </form>
 
     <script src="main.js"></script>
