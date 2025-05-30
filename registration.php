@@ -40,11 +40,6 @@ include 'DBConnector.php';
                 </div>
 
                 <div class="form-group">
-                    <label for="repeat-password">Repeat Password</label>
-                    <input type="repeat-password" id="repeat-password" name="password" placeholder="Repeat Password" required>
-                </div>
-
-                <div class="form-group">
                     <input type="submit" value="Register" name="submit">
                     <button type="cancel" onclick="window.location.href='registration.php'">Cancel</button>
                 </div>

@@ -272,40 +272,24 @@ header {
 }
 
 /* registration */
-.register .register-user-container {
-  display: flex;
-  background-color: var(--light-grey);
-  height: 78vh;
-  flex-direction: row;
-}
-
-.register-user-container .register-user {
-  background-color: var(--pink);
-  margin-top: 1rem;
-  height: 70vh;
-  width: 40vw;
-  border-radius: 40px;
-  position: sticky;
-  top: 9rem;
-  left: 70rem
-  font-family: Manjari, sans-serif;
-  color: white;
-  padding: 2.5rem;
-}
-
 .register-user-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80vh;
   background-color: var(--light-grey);
+  position: relative;
 }
 
-.register-user {
+.register-user-container .register-user {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
   background-color: var(--pink);
   border-radius: 20px;
   padding: 2.5rem;
-  width: 40px;
+  width: 30%;
   color: white;
   font-family: Manjari, sans-serif;
 }
@@ -317,10 +301,12 @@ header {
 }
 
 .register-user form .form-group input {
-  width: 100%;
   border-radius: 50px;
+  width: 100%;
+  height: 2rem;
   padding: 0.5rem 1rem;
   border: none;
+  font-size: 1rem;
 }
 
 .register-user form .form-group input[type="submit"],.register-user form .form-group button {
