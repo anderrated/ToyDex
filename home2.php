@@ -8,91 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>ToyDex</title>
-
-    <style>
-
-        /* for larger section */
-        .add_Popup_Form{
-        display: none;
-        position: fixed;
-        bottom: 25%;
-        right: 35%;
-        border: none;
-        z-index: 9;
-        width: 30%;
-        height: 400px;
-        padding: 10px;
-        background-color: white;
-        border-radius: 50px;
-        font-family: Arial;
-        }
-
-        /* for form */
-        /* .text_section{
-        width: 45%;
-        } */
-
-        .add_Popup_Form div{
-        display: table-row;
-        padding-bottom: 20%;
-        width: 100%;
-        }
-
-        .add_Popup_Input {
-        display: table-cell;
-        width: 100%;
-        max-width: 100%;
-        padding-bottom: 2%;
-        height: 25px;
-        background-color:rgb(166, 0, 255);
-        border-radius: 50px;
-        border: none; 
-        color: white;
-        
-        }
-
-        .add_Popup_Label {
-        display: table-cell;
-        width: 40%;
-        max-width: 40%;
-        color:rgb(166, 0, 255);
-        font-weight: light;
-        font-size: 10px;
-        font-family: Arial;
-        }
-
-        .add_Popup_Form h2{
-        color:rgb(0, 0, 0);
-        font-weight: 100;
-        font-size: 20px;
-        font-family: Arial;
-        }
-
-        .addToyButton{
-        background-color: rgba(0, 247, 255, 0.91);
-        }
-
-        .close_addPop{
-        background-color: rgba(255, 0, 174, 0.91);
-        }
-
-        .addToyButton, .close_addPop{
-        color: white;
-        align-self: center;
-        border-radius: 50px;
-        width: 200px;
-        border: none;
-        margin-top: 10px;
-        }
-
-        .input_division{
-        width:250px;
-        }
-
-        
-
-    </style>
-
 </head>
 <body>
     <section class="home">
@@ -188,10 +103,10 @@
                             while($row = $result->fetch_assoc()) {
                                 echo "<li id='".$row['item_id']."'>
                                         <div class='li-content'>
-                                            <form action='delete_toy.php' class='deleteSection' method='post'>
-                                                <input type='hidden' name='item_id' value='" . $row['item_id'] . "'>
-                                                <button type='submit' id='delete-btn'>Delete</button>
-                                            </form>
+                                            <div class='feedback'>
+                                                <div class='feedback-item'><img src='images/heart-svgrepo-com.svg' class='heart-icon'><span>1.5k</span></div>
+                                                <div class='feedback-item'><img src='images/comment-alt-lines-svgrepo-com.svg' class='comment-icon'><span>1.5k</span></div> 
+                                            </div>
                                             <div class='main-img'>
                                                 <img src='".$row['image_url']."'>
                                             </div>
@@ -220,7 +135,7 @@
                             while($row = $result->fetch_assoc()) {
                                 echo "<li id='".$row['item_id']."'>
                                         <div class='li-content'>
-                                            <form action='delete_toy.php' class='deleteSection' method='post'>
+                                            <form action='deleteToy.php' class='deleteSection' method='post'>
                                                 <input type='hidden' name='item_id' value='" . $row['item_id'] . "'>
                                                 <button type='submit' id='delete-btn'>Delete</button>
                                             </form>
@@ -246,8 +161,7 @@
             </div>
         </section>
     <div class="add">
-        <!-- <img src="images/add-circle-svgrepo-com.svg" id="add-item"> -->
-        <button id="add-item" onclick = "openAddPopup()">add item</button>
+        <img src="images/add-circle-svgrepo-com.svg" id="add-item">
     </div>
     </section>
     <footer>
@@ -277,79 +191,5 @@
             </div>
         </div>
     </footer>
-
-
-   <form action = "addToy.php" class="add_Popup_Form" id = "add_Popup_Form" method=post>
-        <h2>Add a New Toy</h2>
-
-        <div>
-            <label for="Toy_Name" class = "add_Popup_Label">Toy Name</label>
-            <input type = "text" class = "add_Popup_Input" name ="Toy_Name" autocomplete="name" required>
-        </div>
-
-        <div>                
-            <label for="Description" class = "add_Popup_Label">Description</label>
-            <input type = "text" class = "add_Popup_Input" name ="Description" autocomplete="off" required>
-        </div>
-
-        <div> 
-            <label for="brand" class = "add_Popup_Label">Brand</label>
-            <input type = "text" class = "add_Popup_Input" name ="brand" autocomplete="organization" required>
-        </div>
-
-        <div>
-            <label for="Category" class = "add_Popup_Label">Category</label>
-            <input type = "text" class = "add_Popup_Input" name ="Category" autocomplete="off" required>
-        </div>
-
-        <div>
-            <label for="Manufacturer_Name" class = "add_Popup_Label">Manufacturer</label>
-            <input type = "text" class = "add_Popup_Input" name ="Manufacturer_Name" required>
-        </div>
-
-        <div>
-            <label for="manufacturer_location" class = "add_Popup_Label">Manufacturer Location</label>
-            <input type = "text" class = "add_Popup_Input" name ="manufacturer_location" required>
-        </div>
-
-        <div>
-            <label for="batch_num" class = "add_Popup_Label">Batch_num</label>
-            <input type = "number" class = "add_Popup_Input" name ="batch_num" required>
-        </div>
-
-        <div>
-            <label for="Supplier_Name" class = "add_Popup_Label">Supplier Name</label>
-            <input type = "text" class = "add_Popup_Input" name ="Supplier_Name" required>
-        </div>
-
-        <div>
-            <label for="Email" class = "add_Popup_Label">Email</label>
-            <input type = "text" class = "add_Popup_Input" name ="Email" required>
-        </div>
-
-        <div>
-            <label for="date_ordered" class = "add_Popup_Label">Date_Ordered</label>
-            <input type = "date" class = "add_Popup_Input" name ="date_ordered" required>
-        </div>
-
-        <div>
-            <label for="date_acquired" class = "add_Popup_Label">Date_Acquired</label>
-            <input type = "date" class = "add_Popup_Input" name ="date_acquired" required>
-        </div>
-
-        <div>
-            <label for="image_url" class = "add_Popup_Label">image_url</label>
-            <input type = "text" class = "add_Popup_Input" name ="image_url" required>
-        </div>
-
-        <button type="submit" class="addToyButton">Add Toy</button>
-        <button type="button" class="close_addPop" onclick="closeAddPopup()">Cancel</button>
-    </form>
-   
-
-    <!-- <input type="text" class="imageUrl" placeholder="Enter image URL"> <img src="" alt="Image" class="preview"> <button>Delete</button> -->
-
-    <script src="main.js"> </script>
-
 </body>
 </html>

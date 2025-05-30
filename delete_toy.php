@@ -1,66 +1,74 @@
 <?php
+// delete_toy.php
+// Deletes a toy and all its related records (images, purchases, manufacturers, etc.)
+
+// 1) Include your database connection
 include 'DBConnector.php';
 
-$item_id = $_GET['item_id'];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //delete from related tables
-    $conn->query("DELETE FROM likedBy WHERE item_id = '$item_id'");
-    $conn->query("DELETE FROM ownedBy WHERE item_id = '$item_id'");
-    $conn->query("DELETE FROM commentedBy WHERE item_id = '$item_id'");
-    $conn->query("DELETE FROM purchasedThrough WHERE item_id = '$item_id'");
-    $conn->query("DELETE FROM manufactures WHERE item_id = '$item_id'");
-    $conn->query("DELETE FROM has WHERE item_id = '$item_id'");
-    //delete from "toyItem"
-    $sql_delete_toyitem = "DELETE FROM toyItem WHERE item_id = '$item_id'";
-    if ($conn->query($sql_delete_toyitem) === TRUE) {
-        echo "Toy deleted successfully";
-    } else {
-        echo "Error deleting toy: " . $conn->error;
-    }
-} else {
-    //display confirmation
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>Delete Toy - ToyDex</title>
-    </head>
-    <body>
-        <section class="home">
-            <header>
-                <div class="main-header">
-                    <h1 class="toydex-logo">TOYDEX</h1>
-                    <nav>
-                        <ul>
-                            <li><a href="home.php"><img src="images/view-grid-svgrepo-com.svg" alt="home"></a></li>
-                            <li><a href="#"><img src="images/inventory-svgrepo-com.svg" alt="inventory"></a></li>
-                            <li><a href="#"><img src="images/profile-circle-svgrepo-com.svg" alt="profile"></a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="divider"></div>
-            </header>
-            <section class="filter-item-container">
-                <div class="filter-container">
-                    <h2>Delete Toy</h2>
-                    <p>Are you sure you want to delete toy with ID: <?php echo $item_id; ?>?</p>
-                    <form method="post" action="delete_toy.php?item_id=<?php echo $item_id; ?>" class="form-vertical">
-                        <div class="form-group">
-                            <button type="submit">Yes, Delete</button>
-                            <button type="button" onclick="window.location.href='home.php'">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </section>
-        </section>
-    </body>
-    </html>
-    <?php
+// 2) Get and sanitize the toy ID from POST
+$toyid = isset($_POST['item_id']) ? intval($_POST['item_id']) : 0;
+if ($toyid <= 0) {
+    die('Invalid toy ID.');
 }
 
+try {
+    // 3) Fetch associated image IDs
+    $sql = "
+        SELECT h.image_id
+          FROM `has` AS h
+          INNER JOIN `toyimage` AS ti
+            ON h.image_id = ti.image_id
+         WHERE h.item_id = ?
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $toyid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    $imageIds = [];
+    while ($row = $res->fetch_assoc()) {
+        $imageIds[] = $row['image_id'];
+    }
+    $stmt->close();
+
+    // 4) Delete those images (if any)
+    if (!empty($imageIds)) {
+        $placeholders = implode(',', array_fill(0, count($imageIds), '?'));
+        $sql = "DELETE FROM `toyimage` WHERE image_id IN ($placeholders)";
+        $stmt = $conn->prepare($sql);
+
+        // Bind each ID as an integer
+        $types = str_repeat('i', count($imageIds));
+        $stmt->bind_param($types, ...$imageIds);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    // 5) Delete from all other related tables + main table
+    $tables = [
+        'purchaseathrough',
+        'manufactures',
+        'has',
+        'toyitem'
+    ];
+
+    foreach ($tables as $table) {
+        $sql = "DELETE FROM `$table` WHERE item_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $toyid);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    echo "Successfully deleted toy (ID = $toyid) and all related records.";
+
+} catch (mysqli_sql_exception $e) {
+    // In production, you might log $e->getMessage() instead of echoing
+    echo "Error deleting toy: " . $e->getMessage();
+}
+
+header("Location: home.php");
+
+
+// 6) Close connection
 $conn->close();
-?>
