@@ -38,7 +38,7 @@ include 'DBConnector.php';
                         <label>Category:</label>
                         <select class="expand" name="category" placeholder="Category">
                             <option value="">--Select Category--</option>
-                            <option value="None" <?php echo (isset($_GET['category']) && $_GET['category'] == 'None') ? 'selected' : ''; ?>>None</option>
+                            <option value="Dog" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Dog') ? 'selected' : ''; ?>>Dog</option>
                             <option value="Hotdog" <?php echo (isset($_GET['category']) && $_GET['category'] == 'Hotdog') ? 'selected' : ''; ?>>Hotdog</option>
                         </select>
                     </div>
