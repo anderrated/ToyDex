@@ -124,7 +124,7 @@ include 'DBConnector.php';
                                 echo '<li id="' . $id . '">
                                         <div class="li-content">
                                             <div class = update-btns>
-                                                <form action="edit_toy.php" class="deleteSection" method="post">
+                                                <form action="editToy.php" class="deleteSection" method="post">
                                                     <input type="hidden" name="item_id" value="' . $id . '">
                                                     <button type="submit" id="edit-btn">Edit</button>
                                                 </form>
