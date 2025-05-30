@@ -86,22 +86,29 @@ include 'DBConnector.php';
                         $result = $stmt->get_result();
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-                                echo "<li id='".$row['item_id']."'>
-                                        <div class='li-content'>
-                                            <button onclick=\"if(confirm('Are you sure you want to delete this toy?')){document.getElementById('deleteForm_".$row['item_id']."').submit();}\" class='delete-btn'>Delete</button>
-                                            <form id='deleteForm_".$row['item_id']."' action='delete_toy.php' method='post' style='display: none;'>
-                                                <input type='hidden' name='item_id' value='" . $row['item_id'] . "'>
-                                            </form>
-                                            <div class='main-img'>
-                                                <img src='".$row['image_url']."'>
+                                echo '<li id="' . htmlspecialchars($row['item_id']) . '">
+                                        <div class="li-content">
+                                            <div class="update-btns">
+                                                <form action="editToy.php" class="deleteSection" method="post">
+                                                    <input type="hidden" name="item_id" value="' . htmlspecialchars($row['item_id']) . '">
+                                                    <button type="submit" id="edit-btn">Edit</button>
+                                                </form>
+                                                <form action="delete_toy.php" class="deleteSection" method="post">
+                                                    <input type="hidden" name="item_id" value="' . htmlspecialchars($row['item_id']) . '">
+                                                    <button type="submit" id="delete-btn">Delete</button>
+                                                </form>
                                             </div>
-                                            <div class='bubble-text'>
-                                                <h2>".htmlspecialchars($row['name'])."</h2>
-                                                <h4>".htmlspecialchars($row['category'])."</h4>
-                                                <p>".htmlspecialchars($row['brand'])."</p>
+                                            <div class="main-img">
+                                                <img src="' . htmlspecialchars($row['image_url']) . '" alt="' . htmlspecialchars($row['name']) . '">
+                                            </div>
+                                            <div class="bubble-text">
+                                                <h2>' . htmlspecialchars($row['name']) . '</h2>
+                                                <h4>' . htmlspecialchars($row['category']) . '</h4>
+                                                <p>' . htmlspecialchars($row['brand']) . '</p>
                                             </div>
                                         </div>
-                                    </li>";
+                                    </li>';
+
                             }
                         } else {
                             echo "<p class='no-results'>No item(s) found matching your criteria.</p>";
