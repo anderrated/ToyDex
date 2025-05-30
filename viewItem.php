@@ -10,15 +10,13 @@ include 'DBConnector.php';
     
     $item_id = (int) $_GET['item_id'];
 
-    $sql = "SELECT * FROM has, manufacturer, manufactures, provides, purchaseathrough, supplier, toyimage, toyitem WHERE toyitem.item_id = ?";
-
-    //  $sql = "SELECT toyitem.name, toyitem.description, toyitem.item_id, toyimage.image_url, toyitem.brand, toyitem.category 
-    // --                             FROM toyitem 
-    // --                             INNER JOIN has ON toyitem.item_id = has.item_id 
-    // --                             INNER JOIN toyimage ON toyimage.image_id = has.image_id";
+    $sql = "SELECT toyitem.name, toyitem.description, toyitem.item_id, toyimage.image_url, toyitem.brand, toyitem.category 
+                                FROM toyitem 
+                                INNER JOIN has ON toyitem.item_id = has.item_id 
+                                INNER JOIN toyimage ON toyimage.image_id = has.image_id";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $item_id);
+    //$stmt->bind_param("i", $item_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -51,53 +49,23 @@ include 'DBConnector.php';
                 </header>
 
             <div class="view-container">
-                <a href="home.php">← Back to List</a>
-                <div class=details-header>
-                    <h1><?= htmlspecialchars($row['name']) ?></h1>
-                    <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['name']) ?>">
+                 <a href="home.php">← Back to List</a>
+                <h1><?= htmlspecialchars($row['name']) ?></h1>
+                <img src="<?= htmlspecialchars($row['image_url']) ?>" alt="<?= htmlspecialchars($row['name']) ?>">
+
+                <div class="field">
+                    <label>Description</label>
+                    <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
                 </div>
-                <div class="details">
-                    <div class="detail1">
-                        <label>Description</label>
-                        <p><?= nl2br(htmlspecialchars($row['description'])) ?></p>
-                    </div>
-                    <div class="detail2">
-                        <label>Brand</label>
-                        <p><?= htmlspecialchars($row['brand']) ?></p>
-                    </div>
-                    <div class="detail3">
-                        <label>Category</label>
-                        <p><?= htmlspecialchars($row['category']) ?></p>
-                    </div>
-                    <div class="detail4">
-                        <label>Manufacturer</label>
-                        <p><?=htmlspecialchars($row['manufacturer_name']) ?></p>
-                    </div>
-                    <div class="detail5">
-                        <label>Manufacturer Location</label>
-                        <p><?=htmlspecialchars($row['location']) ?></p>
-                    </div>
-                    <div class="detail6">
-                        <label>Batch Number</label>
-                        <p><?=htmlspecialchars($row['batch_num']) ?></p>
-                    </div>
-                    <div class="detail7">
-                        <label>Supplier</label>
-                        <p><?=htmlspecialchars($row['supplier_name']) ?></p>
-                    </div>
-                    <div class="detail8">
-                        <label>Supplier Email</label>
-                        <p><?=htmlspecialchars($row['email']) ?></p>
-                    </div>
-                    <div class="detail9">
-                        <label>Date Ordered</label>
-                        <p><?=htmlspecialchars($row['date_ordered']) ?></p>
-                    </div>
-                    <div class="detail10">
-                        <label>Date Acquired</label>
-                        <p><?=htmlspecialchars($row['date_acquired']) ?></p>
-                    </div>
+                <div class="field">
+                    <label>Brand</label>
+                    <p><?= htmlspecialchars($row['brand']) ?></p>
                 </div>
+                <div class="field">
+                    <label>Category</label>
+                <p><?= htmlspecialchars($row['category']) ?></p>
+            </div>
+
             </section>
 
             <footer>
