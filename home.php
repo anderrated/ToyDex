@@ -117,7 +117,6 @@ include 'DBConnector.php';
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
-<<<<<<< HEAD
                                 echo "<li id='".$row['item_id']."'>
                                         <div class='li-content'>
                                             <button onclick=\"if(confirm('Are you sure you want to delete this toy?')){document.getElementById('deleteForm_".$row['item_id']."').submit();}\" class='delete-btn'>Delete</button>
@@ -126,23 +125,6 @@ include 'DBConnector.php';
                                             </form>
                                             <div class='main-img'>
                                                 <img src='".$row['image_url']."'>
-=======
-                                $id      = (int) $row['item_id'];
-                                $img     = htmlspecialchars($row['image_url']);
-                                $name    = htmlspecialchars($row['name']);
-                                $cat     = htmlspecialchars($row['category']);
-                                $brand   = htmlspecialchars($row['brand']);
-
-                                echo '<li id="' . $id . '">
-                                        <div class="li-content">
-                                        <form action="delete_toy.php" class="deleteSection" method="post">
-                                            <input type="hidden" name="item_id" value="' . $id . '">
-                                            <button type="submit" id="delete-btn">Delete</button>
-                                        </form>
-                                        <a href="viewItem.php?item_id=' . $id . '" class="card-link">
-                                            <div class="main-img">
-                                            <img src="' . $img . '" alt="' . $name . '">
->>>>>>> parent of 128324e (added design to description and modified sql of viewItem.php)
                                             </div>
                                             <div class='bubble-text'>
                                                 <h2>".htmlspecialchars($row['name'])."</h2>
