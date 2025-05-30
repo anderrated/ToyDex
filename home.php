@@ -123,10 +123,16 @@ include 'DBConnector.php';
 
                                 echo '<li id="' . $id . '">
                                         <div class="li-content">
-                                        <form action="delete_toy.php" class="deleteSection" method="post">
-                                            <input type="hidden" name="item_id" value="' . $id . '">
-                                            <button type="submit" id="delete-btn">Delete</button>
-                                        </form>
+                                        <div class = update-btns>
+                                            <form action="edit_toy.php" class="deleteSection" method="post">
+                                                <input type="hidden" name="item_id" value="' . $id . '">
+                                                <button type="submit" id="edit-btn">Edit</button>
+                                            </form>
+                                            <form action="delete_toy.php" class="deleteSection" method="post">
+                                                <input type="hidden" name="item_id" value="' . $id . '">
+                                                <button type="submit" id="delete-btn">Delete</button>
+                                            </form>
+                                        </div>
                                         <a href="viewItem.php?item_id=' . $id . '" class="card-link">
                                             <div class="main-img">
                                             <img src="' . $img . '" alt="' . $name . '">
