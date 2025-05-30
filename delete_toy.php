@@ -12,6 +12,9 @@ if ($toyid <= 0) {
 }
 
 try {
+    // Log the toy being deleted
+    echo "Deleting toy with ID: $toyid<br>";
+
     // 3) Fetch associated image IDs
     $sql = "
         SELECT h.image_id
@@ -53,6 +56,7 @@ try {
     ];
 
     foreach ($tables as $table) {
+        echo "Executing: DELETE FROM `$table` WHERE item_id = $toyid<br>";
         $sql = "DELETE FROM `$table` WHERE item_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('i', $toyid);
@@ -68,7 +72,7 @@ try {
 }
 
 header("Location: home.php");
-
+exit;
 
 // 6) Close connection
 $conn->close();
